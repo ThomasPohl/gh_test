@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 angular
-  .module('ghTestJoApp', [
+  .module('esqlPluginApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',

@@ -7,11 +7,8 @@
  * # MainCtrl
  * Controller of the ghTestJoApp
  */
-angular.module('ghTestJoApp')
-  .controller('MainCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+angular.module('esqlPluginApp')
+  .controller('MainCtrl', function ($scope,Repository) {
+    $scope.latestRelease = Repository.getLatestRelease({owner:'exxeta', repo:'sonar-esql-plugin'});
+    $scope.repo = Repository.get({owner:'exxeta', repo:'sonar-esql-plugin'});
   });

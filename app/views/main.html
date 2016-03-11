@@ -1,23 +1,17 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#/">Splendid!<span class="glyphicon glyphicon-ok"></span></a></p>
+<div class="container">
+  <p class="container-title">{{repo.name}}</p>
+    <hr class="linie"></hr>
+    <h3>Description:</h3>
+    <p class="description">{{repo.description}}</p>
+    <h3>Latest Release ({{latestRelease.name}}):</h3>
+    <ul class="downloads">
+        <li><i class="octicon octicon-tag"></i>{{latestRelease.tag_name}}</li>
+        <li ng-repeat="asset in latestRelease.assets"><i class="octicon octicon-package"></i><a ng-href="{{asset.browser_download_url}}" >{{asset.name}}</a></li>
+        <li><i class="octicon octicon-file-zip"></i><a ng-href="{{latestRelease.tarball_url}}" >Sourcecode (tar.gz)</a></li>
+        <li><i class="octicon octicon-file-zip"></i><a ng-href="{{latestRelease.zipball_url}}" >Sourcecode (zip)</a></li>
+    </ul>
+    
 </div>
 
-<div class="row marketing">
-  <h4>HTML5 Boilerplate</h4>
-  <p>
-    HTML5 Boilerplate is a professional front-end template for building fast, robust, and adaptable web apps or sites.
-  </p>
 
-  <h4>Angular</h4>
-  <p>
-    AngularJS is a toolset for building the framework most suited to your application development.
-  </p>
 
-  <h4>Karma</h4>
-  <p>Spectacular Test Runner for JavaScript.</p>
-</div>

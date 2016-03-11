@@ -55,6 +55,10 @@ module.exports = function (grunt) {
       gruntfile: {
         files: ['Gruntfile.js']
       },
+      less: {
+         files: ['<%= yeoman.app %>/styles/{,*/}*.less'],
+         tasks: ['less']
+      },
       livereload: {
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -75,6 +79,18 @@ module.exports = function (grunt) {
         hostname: 'localhost',
         livereload: 35729
       },
+      proxies: [
+        {
+          context: '/repos',
+          host: 'api.github.com',
+          port: 443,
+          https: true,
+          changeOrigin: false,
+          /*rewrite: {
+            '^/api': '/<%= yeoman.jbossContext %>/api',
+          }*/
+        }
+      ],
       livereload: {
         options: {
           open: true,
@@ -221,7 +237,20 @@ module.exports = function (grunt) {
           }
       }
     }, 
-
+    less: {
+      dist: {
+        options: {
+          sourceMap: true,
+          sourceMapBasepath: '<%= yeoman.app %>/',
+          sourceMapRootpath: '../'
+        },
+        files: {
+          '.tmp/styles/main.css': '<%= yeoman.app %>/styles/main.less'
+        }
+      },
+      options: {
+      }
+    },
     // Renames files for browser caching purposes
     filerev: {
       dist: {
@@ -405,12 +434,15 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
+        'less',
         'copy:styles'
       ],
       test: [
+        'less',
         'copy:styles'
       ],
       dist: [
+        'less',
         'copy:styles',
         'imagemin',
         'svgmin'
@@ -431,6 +463,7 @@ module.exports = function (grunt) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
+    
 
     grunt.task.run([
       'clean:server',
